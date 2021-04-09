@@ -1,0 +1,14 @@
+FROM debian:stable
+MAINTAINER ago
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV TZ Asia/Tokyo
+
+RUN apt-get update \
+ && apt-get install -y dovecot-imapd dovecot-sieve dovecot-managesieved
+
+COPY ./etc /etc
+COPY ./preprocess.sh /
+COPY ./entrypoint-dovecot.sh /
+
+ENTRYPOINT ["/entrypoint-dovecot.sh"]

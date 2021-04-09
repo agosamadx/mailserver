@@ -1,0 +1,61 @@
+version: "3"
+services:
+  postfix:
+    build:
+      context: ./server
+      dockerfile: Dockerfile-postfix
+    image: postfix
+    environment:
+      - USERS=${USERS}
+      - MAIL_DOMAIN=${MAIL_DOMAIN}
+      - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
+    volumes:
+      - ./home:/home
+      - smtpauth:/var/spool/postfix/private/
+      - letsencrypt-etc:/etc/letsencrypt
+      - letsencrypt-var:/var/lib/letsencrypt
+    ports:
+      - "25:25"
+      - "465:465"
+      - "587:587"
+    depends_on:
+      - certbot
+  dovecot:
+    build:
+      context: ./server
+      dockerfile: Dockerfile-dovecot
+    image: dovecot
+    environment:
+      - USERS=${USERS}
+      - MAIL_DOMAIN=${MAIL_DOMAIN}
+      - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
+    volumes:
+      - ./home:/home
+      - smtpauth:/var/spool/postfix/private/
+      - letsencrypt-etc:/etc/letsencrypt
+      - letsencrypt-var:/var/lib/letsencrypt
+    ports:
+      - "143:143"
+      - "993:993"
+      - "4190:4190"
+    depends_on:
+      - certbot
+  certbot:
+    build: ./certbot
+    image: certbot
+    environment:
+      - MAIL_DOMAIN=${MAIL_DOMAIN}
+      - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
+    volumes:
+      - letsencrypt-etc:/etc/letsencrypt
+      - letsencrypt-var:/var/lib/letsencrypt
+    ports:
+      - "80:80"
+#      - 443:443
+volumes:
+  letsencrypt-etc:
+    driver: local
+  letsencrypt-var:
+    driver: local
+  smtpauth:
+    driver: local
