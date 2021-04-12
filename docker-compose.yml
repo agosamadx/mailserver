@@ -12,8 +12,8 @@ services:
     volumes:
       - ./home:/home
       - smtpauth:/var/spool/postfix/private/
-      - letsencrypt-etc:/etc/letsencrypt
-      - letsencrypt-var:/var/lib/letsencrypt
+      - letsencrypt-etc:/etc/letsencrypt/
+      - letsencrypt-var:/var/lib/letsencrypt/
     ports:
       - "25:25"
       - "465:465"
@@ -32,12 +32,29 @@ services:
     volumes:
       - ./home:/home
       - smtpauth:/var/spool/postfix/private/
-      - letsencrypt-etc:/etc/letsencrypt
-      - letsencrypt-var:/var/lib/letsencrypt
+      - letsencrypt-etc:/etc/letsencrypt/
+      - letsencrypt-var:/var/lib/letsencrypt/
     ports:
       - "143:143"
       - "993:993"
       - "4190:4190"
+    depends_on:
+      - certbot
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile-apache
+    image: web
+    environment:
+      - USERS=${USERS}
+      - MAIL_DOMAIN=${MAIL_DOMAIN}
+      - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
+    ports:
+        - "443:443"
+    volumes:
+      - database:/var/www/database/
+      - letsencrypt-etc:/etc/letsencrypt/
+      - letsencrypt-var:/var/lib/letsencrypt/
     depends_on:
       - certbot
   certbot:
@@ -47,15 +64,16 @@ services:
       - MAIL_DOMAIN=${MAIL_DOMAIN}
       - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
     volumes:
-      - letsencrypt-etc:/etc/letsencrypt
-      - letsencrypt-var:/var/lib/letsencrypt
+      - letsencrypt-etc:/etc/letsencrypt/
+      - letsencrypt-var:/var/lib/letsencrypt/
     ports:
       - "80:80"
-#      - 443:443
 volumes:
   letsencrypt-etc:
     driver: local
   letsencrypt-var:
     driver: local
   smtpauth:
+    driver: local
+  database:
     driver: local

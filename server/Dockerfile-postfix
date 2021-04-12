@@ -5,7 +5,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Asia/Tokyo
 
 RUN apt-get update \
- && apt-get install -y postfix dovecot-core dovecot-sieve
+ && apt-get install -y postfix dovecot-core dovecot-sieve \
+ && apt-get clean
 
 COPY ./etc /etc
 COPY ./preprocess.sh /
