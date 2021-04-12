@@ -19,6 +19,16 @@
 
 $config = [];
 
+// This domain will be used to form e-mail addresses of new users
+// Specify an array with 'host' => 'domain' values to support multiple hosts
+// Supported replacement variables:
+// %h - user's IMAP hostname
+// %n - http hostname ($_SERVER['SERVER_NAME'])
+// %d - domain (http hostname without the first part)
+// %z - IMAP domain (IMAP hostname without the first part)
+// For example %n = mail.domain.tld, %t = domain.tld
+$config['mail_domain'] = 'MAIL_DOMAIN';
+
 // Database connection string (DSN) for read+write operations
 // Format (compatible with PEAR MDB2): db_provider://user:password@host/database
 // Currently supported db_providers: mysql, pgsql, sqlite, mssql, sqlsrv, oracle
@@ -43,6 +53,7 @@ $config['default_host'] = 'tls://dovecot';
 // TCP port used for IMAP connections
 $config['default_port'] = 143;
 
+$config['imap_vendor'] = 'dovecot';
 $config['imap_conn_options'] = [
   'ssl' => [
     'verify_peer_name'  => false
