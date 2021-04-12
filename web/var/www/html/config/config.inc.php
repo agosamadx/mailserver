@@ -69,7 +69,7 @@ $config['smtp_port'] = 587;
 $config['smtp_conn_options'] = [
   'ssl' => [
     'verify_peer_name'  => false
-  ],
+  ]
 ];
 
 
@@ -98,6 +98,16 @@ $config['des_key'] = 'rcmail-!24ByteDESkey*Str';
 $config['plugins'] = [
     'archive',
     'zipdownload',
+    'managesieve'
+];
+
+$config['managesieve_host'] = 'tls://dovecot';
+$config['managesieve_port'] = 4190;
+$config['managesieve_usetls'] = true;
+$config['managesieve_conn_options'] = [
+  'ssl' => [
+    'verify_peer_name' => false
+  ]
 ];
 
 // skin name: folder from skins/
