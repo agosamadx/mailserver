@@ -1,4 +1,4 @@
-#
+# 例
 - mail address: user@example.com
 - smtp: mail.example.com
 - imap: mail.example.com
