@@ -9,6 +9,8 @@ services:
       - USERS=${USERS}
       - MAIL_DOMAIN=${MAIL_DOMAIN}
       - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
+      - SMTP_DOMAIN=${SMTP_DOMAIN}
+      - IMAP_DOMAIN=${IMAP_DOMAIN}
     volumes:
       - ./home:/home
       - smtpauth:/var/spool/postfix/private/
@@ -29,6 +31,8 @@ services:
       - USERS=${USERS}
       - MAIL_DOMAIN=${MAIL_DOMAIN}
       - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
+      - SMTP_DOMAIN=${SMTP_DOMAIN}
+      - IMAP_DOMAIN=${IMAP_DOMAIN}
     volumes:
       - ./home:/home
       - smtpauth:/var/spool/postfix/private/
@@ -49,6 +53,8 @@ services:
       - USERS=${USERS}
       - MAIL_DOMAIN=${MAIL_DOMAIN}
       - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
+      - SMTP_DOMAIN=${SMTP_DOMAIN}
+      - IMAP_DOMAIN=${IMAP_DOMAIN}
     ports:
         - "443:443"
     volumes:
@@ -63,6 +69,8 @@ services:
     environment:
       - MAIL_DOMAIN=${MAIL_DOMAIN}
       - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
+      - SMTP_DOMAIN=${SMTP_DOMAIN}
+      - IMAP_DOMAIN=${IMAP_DOMAIN}
     volumes:
       - letsencrypt-etc:/etc/letsencrypt/
       - letsencrypt-var:/var/lib/letsencrypt/
