@@ -1,7 +1,8 @@
 # 例
 - mail address: user@example.com
-- smtp: mail.example.com
-- imap: mail.example.com
+- smtp: smtp.example.com
+- imap: imap.example.com
+- webmail: webmail.example.com
 ```
 $ mv dot.env.sample .env
 $ vi .env
