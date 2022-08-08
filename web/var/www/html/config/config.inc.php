@@ -19,14 +19,6 @@
 
 $config = [];
 
-// This domain will be used to form e-mail addresses of new users
-// Specify an array with 'host' => 'domain' values to support multiple hosts
-// Supported replacement variables:
-// %h - user's IMAP hostname
-// %n - http hostname ($_SERVER['SERVER_NAME'])
-// %d - domain (http hostname without the first part)
-// %z - IMAP domain (IMAP hostname without the first part)
-// For example %n = mail.domain.tld, %t = domain.tld
 $config['mail_domain'] = 'MAIL_DOMAIN';
 
 // Database connection string (DSN) for read+write operations
@@ -37,22 +29,9 @@ $config['mail_domain'] = 'MAIL_DOMAIN';
 //       or (Windows): 'sqlite:///C:/full/path/to/sqlite.db'
 $config['db_dsnw'] = 'sqlite:////var/www/database/sqlite.db?mode=0644';
 
-// The IMAP host chosen to perform the log-in.
-// Leave blank to show a textbox at login, give a list of hosts
-// to display a pulldown menu or set one host as string.
-// Enter hostname with prefix ssl:// to use Implicit TLS, or use
-// prefix tls:// to use STARTTLS.
-// Supported replacement variables:
-// %n - hostname ($_SERVER['SERVER_NAME'])
-// %t - hostname without the first part
-// %d - domain (http hostname $_SERVER['HTTP_HOST'] without the first part)
-// %s - domain name after the '@' from e-mail address provided at login screen
-// For example %n = mail.domain.tld, %t = domain.tld
-$config['default_host'] = 'tls://dovecot';
-
-// TCP port used for IMAP connections
-$config['default_port'] = 143;
-
+// IMAP host chosen to perform the log-in.
+// See defaults.inc.php for the option description.
+$config['imap_host'] = 'tls://dovecot';
 $config['imap_vendor'] = 'dovecot';
 $config['imap_conn_options'] = [
   'ssl' => [
@@ -61,28 +40,13 @@ $config['imap_conn_options'] = [
 ];
 
 // SMTP server host (for sending mails).
-// Enter hostname with prefix ssl:// to use Implicit TLS, or use
-// prefix tls:// to use STARTTLS.
-// Supported replacement variables:
-// %h - user's IMAP hostname
-// %n - hostname ($_SERVER['SERVER_NAME'])
-// %t - hostname without the first part
-// %d - domain (http hostname $_SERVER['HTTP_HOST'] without the first part)
-// %z - IMAP domain (IMAP hostname without the first part)
-// For example %n = mail.domain.tld, %t = domain.tld
-// To specify differnt SMTP servers for different IMAP hosts provide an array
-// of IMAP host (no prefix or port) and SMTP server e.g. ['imap.example.com' => 'smtp.example.net']
-$config['smtp_server'] = 'tls://postfix';
-
-// SMTP port. Use 25 for cleartext, 465 for Implicit TLS, or 587 for STARTTLS (default)
-$config['smtp_port'] = 587;
-
+// See defaults.inc.php for the option description.
+$config['smtp_host'] = 'tls://postfix';
 $config['smtp_conn_options'] = [
-  'ssl' => [
+  'ssl'         => [
     'verify_peer_name'  => false
   ]
 ];
-
 
 // SMTP username (if required) if you use %u as the username Roundcube
 // will use the current username for login
