@@ -41,6 +41,6 @@ RUN rm -r /var/www/html \
 COPY ./etc /etc
 COPY ./var /var
 COPY ./preprocess.sh /
-COPY ./entrypoint-apache.sh /
+COPY ./entrypoint.sh /
 
-ENTRYPOINT ["/entrypoint-apache.sh"]
+ENTRYPOINT ["/entrypoint.sh"]

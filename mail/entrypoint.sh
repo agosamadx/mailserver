@@ -2,4 +2,4 @@
 
 ./preprocess.sh
 
-exec /usr/sbin/dovecot -F
+exec /usr/bin/supervisord

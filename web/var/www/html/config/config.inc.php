@@ -31,7 +31,7 @@ $config['db_dsnw'] = 'sqlite:////var/www/database/sqlite.db?mode=0644';
 
 // IMAP host chosen to perform the log-in.
 // See defaults.inc.php for the option description.
-$config['imap_host'] = 'tls://dovecot';
+$config['imap_host'] = 'tls://mail';
 $config['imap_vendor'] = 'dovecot';
 $config['imap_conn_options'] = [
   'ssl' => [
@@ -41,7 +41,7 @@ $config['imap_conn_options'] = [
 
 // SMTP server host (for sending mails).
 // See defaults.inc.php for the option description.
-$config['smtp_host'] = 'tls://postfix';
+$config['smtp_host'] = 'tls://mail';
 $config['smtp_conn_options'] = [
   'ssl'         => [
     'verify_peer_name'  => false
@@ -76,7 +76,7 @@ $config['plugins'] = [
     'managesieve'
 ];
 
-$config['managesieve_host'] = 'tls://dovecot';
+$config['managesieve_host'] = 'tls://mail';
 $config['managesieve_port'] = 4190;
 $config['managesieve_usetls'] = true;
 $config['managesieve_conn_options'] = [

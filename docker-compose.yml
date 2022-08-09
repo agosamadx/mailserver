@@ -1,10 +1,10 @@
 version: "3"
 services:
-  postfix:
+  mail:
     build:
-      context: ./server
-      dockerfile: Dockerfile-postfix
-    image: postfix
+      context: ./mail
+      dockerfile: Dockerfile
+    image: mail
     environment:
       - USERS=${USERS}
       - MAIL_DOMAIN=${MAIL_DOMAIN}
@@ -13,37 +13,19 @@ services:
       - IMAP_DOMAIN=${IMAP_DOMAIN}
     volumes:
       - ./home:/home
-      - postfix-spool:/var/spool/postfix/
       - letsencrypt-etc:/etc/letsencrypt/
       - letsencrypt-var:/var/lib/letsencrypt/
     ports:
       - "25:25"
       - "465:465"
       - "587:587"
-  dovecot:
-    build:
-      context: ./server
-      dockerfile: Dockerfile-dovecot
-    image: dovecot
-    environment:
-      - USERS=${USERS}
-      - MAIL_DOMAIN=${MAIL_DOMAIN}
-      - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
-      - SMTP_DOMAIN=${SMTP_DOMAIN}
-      - IMAP_DOMAIN=${IMAP_DOMAIN}
-    volumes:
-      - ./home:/home
-      - postfix-spool:/var/spool/postfix/
-      - letsencrypt-etc:/etc/letsencrypt/
-      - letsencrypt-var:/var/lib/letsencrypt/
-    ports:
       - "143:143"
       - "993:993"
       - "4190:4190"
   web:
     build:
       context: ./web
-      dockerfile: Dockerfile-apache
+      dockerfile: Dockerfile
     image: web
     environment:
       - USERS=${USERS}
@@ -74,8 +56,6 @@ volumes:
   letsencrypt-etc:
     driver: local
   letsencrypt-var:
-    driver: local
-  postfix-spool:
     driver: local
   database:
     driver: local
