@@ -8,7 +8,7 @@ services:
     environment:
       - USERS=${USERS}
       - MAIL_DOMAIN=${MAIL_DOMAIN}
-      - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
+      - MX_DOMAIN=${MX_DOMAIN}
       - SMTP_DOMAIN=${SMTP_DOMAIN}
       - IMAP_DOMAIN=${IMAP_DOMAIN}
     volumes:
@@ -30,7 +30,7 @@ services:
     environment:
       - USERS=${USERS}
       - MAIL_DOMAIN=${MAIL_DOMAIN}
-      - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
+      - MX_DOMAIN=${MX_DOMAIN}
       - SMTP_DOMAIN=${SMTP_DOMAIN}
       - IMAP_DOMAIN=${IMAP_DOMAIN}
     ports:
@@ -44,7 +44,7 @@ services:
     image: certbot
     environment:
       - MAIL_DOMAIN=${MAIL_DOMAIN}
-      - MAIL_SERVER_DOMAIN=${MAIL_SERVER_DOMAIN}
+      - MX_DOMAIN=${MX_DOMAIN}
       - SMTP_DOMAIN=${SMTP_DOMAIN}
       - IMAP_DOMAIN=${IMAP_DOMAIN}
     volumes:

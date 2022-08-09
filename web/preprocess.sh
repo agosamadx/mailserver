@@ -5,16 +5,16 @@ if [ -f /var/www/html/config/config.inc.php ]; then
   sed -i -e "s/rcmail-\!24ByteDESkey\*Str/$(cat /dev/urandom | base64 | fold -w 24 | head -n 1)/" /var/www/html/config/config.inc.php
 fi
 if [ -f /etc/apache2/sites-available/default-ssl.conf ]; then
-  sed -i -e "s/MAIL_SERVER_DOMAIN/${MAIL_SERVER_DOMAIN}/g" /etc/apache2/sites-available/default-ssl.conf
+  sed -i -e "s/MX_DOMAIN/${MX_DOMAIN}/g" /etc/apache2/sites-available/default-ssl.conf
 fi
 
 
-while [ ! -f /etc/letsencrypt/live/${MAIL_SERVER_DOMAIN}/cert.pem ]; do
+while [ ! -f /etc/letsencrypt/live/${MX_DOMAIN}/cert.pem ]; do
   sleep 1
 done
-while [ ! -f /etc/letsencrypt/live/${MAIL_SERVER_DOMAIN}/privkey.pem ]; do
+while [ ! -f /etc/letsencrypt/live/${MX_DOMAIN}/privkey.pem ]; do
   sleep 1
 done
-while [ ! -f /etc/letsencrypt/live/${MAIL_SERVER_DOMAIN}/chain.pem ]; do
+while [ ! -f /etc/letsencrypt/live/${MX_DOMAIN}/chain.pem ]; do
   sleep 1
 done
