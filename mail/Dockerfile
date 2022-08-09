@@ -5,10 +5,11 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Asia/Tokyo
 
 RUN apt-get update \
- && apt-get install -y postfix dovecot-imapd dovecot-sieve dovecot-managesieved supervisor \
+ && apt-get install -y postfix dovecot-imapd dovecot-sieve dovecot-managesieved supervisor busybox-static \
  && apt-get clean
 
 COPY ./etc /etc
+COPY ./var /var
 COPY ./preprocess.sh /
 COPY ./entrypoint.sh /
 
