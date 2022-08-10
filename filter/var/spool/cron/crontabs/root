@@ -1,0 +1,2 @@
+0 * * * * /usr/bin/freshclam --quiet
+0 * * * * /usr/bin/sa-update

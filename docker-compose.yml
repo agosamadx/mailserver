@@ -5,6 +5,7 @@ services:
       context: ./mail
       dockerfile: Dockerfile
     image: mail
+    hostname: ${MX_DOMAIN}
     environment:
       - USERS=${USERS}
       - MAIL_DOMAIN=${MAIL_DOMAIN}
@@ -15,6 +16,8 @@ services:
       - ./home:/home
       - letsencrypt-etc:/etc/letsencrypt/
       - letsencrypt-var:/var/lib/letsencrypt/
+    networks:
+      - mailserver_network
     ports:
       - "25:25"
       - "465:465"
@@ -22,17 +25,32 @@ services:
       - "143:143"
       - "993:993"
       - "4190:4190"
-  web:
+  filter:
     build:
-      context: ./web
+      context: ./filter
       dockerfile: Dockerfile
-    image: web
+    image: filter
+    hostname: filter.${MAIL_DOMAIN}
+    environment:
+      - MAIL_DOMAIN=${MAIL_DOMAIN}
+      - MX_DOMAIN=${MX_DOMAIN}
+      - SMTP_DOMAIN=${SMTP_DOMAIN}
+      - IMAP_DOMAIN=${IMAP_DOMAIN}
+    networks:
+      - mailserver_network
+  webmail:
+    build:
+      context: ./webmail
+      dockerfile: Dockerfile
+    image: webmail
     environment:
       - USERS=${USERS}
       - MAIL_DOMAIN=${MAIL_DOMAIN}
       - MX_DOMAIN=${MX_DOMAIN}
       - SMTP_DOMAIN=${SMTP_DOMAIN}
       - IMAP_DOMAIN=${IMAP_DOMAIN}
+    networks:
+      - mailserver_network
     ports:
         - "443:443"
     volumes:
@@ -50,8 +68,17 @@ services:
     volumes:
       - letsencrypt-etc:/etc/letsencrypt/
       - letsencrypt-var:/var/lib/letsencrypt/
+    networks:
+      - mailserver_network
     ports:
       - "80:80"
+
+networks:
+  mailserver_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.64.0.0/24
 volumes:
   letsencrypt-etc:
     driver: local

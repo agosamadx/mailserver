@@ -1,0 +1,18 @@
+use strict;
+
+#
+# Place your configuration directives here.  They will override those in
+# earlier files.
+#
+# See /usr/share/doc/amavisd-new/ for documentation and examples of
+# the directives you can use in this file
+#
+
+$inet_socket_bind = undef;
+@inet_acl = qw( 127.0.0.0/8 172.64.0.0/12 );
+
+$notify_method  = 'smtp:[mail]:10025';
+$forward_method = 'smtp:[mail]:10025';
+
+#------------ Do not modify anything below this line -------------
+1;  # ensure a defined return
