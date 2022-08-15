@@ -1,5 +1,5 @@
 # 例
-- mail domain: user@example.com
+- mail address: user1@example.com user2@example.com
 - mx record: mail.example.com
 - smtp: smtp.example.com
 - imap: imap.example.com
