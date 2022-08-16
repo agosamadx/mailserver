@@ -14,10 +14,6 @@ RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash - \
  && apt-get clean \
  && npm install -g less less-plugin-clean-css
 
-RUN a2enmod ssl \
- && a2ensite default-ssl \
- && a2dissite 000-default
-
 RUN cd /usr/local/bin \
  && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
  && php composer-setup.php \

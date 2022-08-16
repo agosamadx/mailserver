@@ -42,11 +42,11 @@ services:
       - ./home:/home/
     networks:
       - mailserver_network
-  webmail:
+  web:
     build:
-      context: ./webmail
+      context: ./web
       dockerfile: Dockerfile
-    image: webmail
+    image: web
     environment:
       - MAIL_DOMAIN=${MAIL_DOMAIN}
       - MX_DOMAIN=${MX_DOMAIN}
@@ -56,10 +56,12 @@ services:
     networks:
       - mailserver_network
     ports:
+        - "80:80"
         - "443:443"
     volumes:
       - database:/var/www/database/
       - ./letsencrypt:/etc/letsencrypt/
+      - letsencrypt-wellknown:/var/www/html/.well-known
       - letsencrypt-var:/var/lib/letsencrypt/
   certbot:
     build: ./certbot
@@ -72,11 +74,10 @@ services:
       - ADDITIONAL_MAIL_DOMAINS=${ADDITIONAL_MAIL_DOMAINS}
     volumes:
       - ./letsencrypt:/etc/letsencrypt/
+      - letsencrypt-wellknown:/var/www/html/.well-known
       - letsencrypt-var:/var/lib/letsencrypt/
     networks:
       - mailserver_network
-    ports:
-      - "80:80"
 
 networks:
   mailserver_network:
@@ -86,6 +87,8 @@ networks:
         - subnet: 172.64.0.0/24
 volumes:
   letsencrypt-var:
+    driver: local
+  letsencrypt-wellknown:
     driver: local
   database:
     driver: local
