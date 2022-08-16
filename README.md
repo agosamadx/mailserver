@@ -1,5 +1,5 @@
 # 例
-- mail address: user1@example.com(user1@example.jp) user2@example.com(user2@example.jp)
+- mail address: userx@example.com(userx@example.jp) usery@example.com(usery@example.jp)
 - mx record: mail.example.com
 - smtp: smtp.example.com
 - imap: imap.example.com
