@@ -15,7 +15,7 @@ services:
       - ADDITIONAL_MAIL_DOMAINS=${ADDITIONAL_MAIL_DOMAINS}
     volumes:
       - ./home:/home/
-      - letsencrypt-etc:/etc/letsencrypt/
+      - ./letsencrypt:/etc/letsencrypt/
       - letsencrypt-var:/var/lib/letsencrypt/
     networks:
       - mailserver_network
@@ -59,7 +59,7 @@ services:
         - "443:443"
     volumes:
       - database:/var/www/database/
-      - letsencrypt-etc:/etc/letsencrypt/
+      - ./letsencrypt:/etc/letsencrypt/
       - letsencrypt-var:/var/lib/letsencrypt/
   certbot:
     build: ./certbot
@@ -71,7 +71,7 @@ services:
       - IMAP_DOMAIN=${IMAP_DOMAIN}
       - ADDITIONAL_MAIL_DOMAINS=${ADDITIONAL_MAIL_DOMAINS}
     volumes:
-      - letsencrypt-etc:/etc/letsencrypt/
+      - ./letsencrypt:/etc/letsencrypt/
       - letsencrypt-var:/var/lib/letsencrypt/
     networks:
       - mailserver_network
@@ -85,8 +85,6 @@ networks:
       config:
         - subnet: 172.64.0.0/24
 volumes:
-  letsencrypt-etc:
-    driver: local
   letsencrypt-var:
     driver: local
   database:
