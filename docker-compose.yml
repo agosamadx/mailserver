@@ -12,9 +12,9 @@ services:
       - MX_DOMAIN=${MX_DOMAIN}
       - SMTP_DOMAIN=${SMTP_DOMAIN}
       - IMAP_DOMAIN=${IMAP_DOMAIN}
-      - ADDITIONAL_SMTP_DESTINATIONS=${ADDITIONAL_SMTP_DESTINATIONS}
+      - ADDITIONAL_MAIL_DOMAINS=${ADDITIONAL_MAIL_DOMAINS}
     volumes:
-      - ./home:/home
+      - ./home:/home/
       - letsencrypt-etc:/etc/letsencrypt/
       - letsencrypt-var:/var/lib/letsencrypt/
     networks:
@@ -37,9 +37,9 @@ services:
       - MX_DOMAIN=${MX_DOMAIN}
       - SMTP_DOMAIN=${SMTP_DOMAIN}
       - IMAP_DOMAIN=${IMAP_DOMAIN}
-      - ADDITIONAL_SMTP_DESTINATIONS=${ADDITIONAL_SMTP_DESTINATIONS}
+      - ADDITIONAL_MAIL_DOMAINS=${ADDITIONAL_MAIL_DOMAINS}
     volumes:
-      - ./home:/home
+      - ./home:/home/
     networks:
       - mailserver_network
   webmail:
@@ -48,12 +48,11 @@ services:
       dockerfile: Dockerfile
     image: webmail
     environment:
-      - USERS=${USERS}
       - MAIL_DOMAIN=${MAIL_DOMAIN}
       - MX_DOMAIN=${MX_DOMAIN}
       - SMTP_DOMAIN=${SMTP_DOMAIN}
       - IMAP_DOMAIN=${IMAP_DOMAIN}
-      - ADDITIONAL_SMTP_DESTINATIONS=${ADDITIONAL_SMTP_DESTINATIONS}
+      - ADDITIONAL_MAIL_DOMAINS=${ADDITIONAL_MAIL_DOMAINS}
     networks:
       - mailserver_network
     ports:
@@ -70,7 +69,7 @@ services:
       - MX_DOMAIN=${MX_DOMAIN}
       - SMTP_DOMAIN=${SMTP_DOMAIN}
       - IMAP_DOMAIN=${IMAP_DOMAIN}
-      - ADDITIONAL_SMTP_DESTINATIONS=${ADDITIONAL_SMTP_DESTINATIONS}
+      - ADDITIONAL_MAIL_DOMAINS=${ADDITIONAL_MAIL_DOMAINS}
     volumes:
       - letsencrypt-etc:/etc/letsencrypt/
       - letsencrypt-var:/var/lib/letsencrypt/

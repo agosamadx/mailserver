@@ -19,7 +19,7 @@
 
 $config = [];
 
-$config['mail_domain'] = 'MAIL_DOMAIN';
+$config['mail_domain'] = '__MAIL_DOMAIN__';
 
 // Database connection string (DSN) for read+write operations
 // Format (compatible with PEAR MDB2): db_provider://user:password@host/database

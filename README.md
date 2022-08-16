@@ -12,7 +12,7 @@ MX_DOMAIN=mail.example.com
 SMTP_DOMAIN=smtp.example.com
 IMAP_DOMAIN=imap.example.com
 USERS=userx:passwordx usery:passwordy
-ADDITIONAL_SMTP_DESTINATIONS=example.jp
+ADDITIONAL_MAIL_DOMAINS=example.jp
 $ docker compose build
 $ docker compose up -d
 ```
