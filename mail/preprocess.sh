@@ -22,4 +22,5 @@ while [ ! -f /etc/letsencrypt/live/${MX_DOMAIN}/privkey.pem ]; do
   sleep 1
 done
 
-echo ${MAIL_DOMAIN} > /etc/mailname && newaliases
+echo ${MAIL_DOMAIN} > /etc/mailname
+newaliases
