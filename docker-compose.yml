@@ -38,6 +38,8 @@ services:
       - SMTP_DOMAIN=${SMTP_DOMAIN}
       - IMAP_DOMAIN=${IMAP_DOMAIN}
       - ADDITIONAL_SMTP_DESTINATIONS=${ADDITIONAL_SMTP_DESTINATIONS}
+    volumes:
+      - ./home:/home
     networks:
       - mailserver_network
   webmail:
