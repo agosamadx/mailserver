@@ -13,6 +13,8 @@ SMTP_DOMAIN=smtp.example.com
 IMAP_DOMAIN=imap.example.com
 USERS=userx:passwordx usery:passwordy
 ADDITIONAL_MAIL_DOMAINS=example.jp
+HTTP_PORT=80
+HTTPS_PORT=443
 $ docker compose build
 $ docker compose up -d
 ```
