@@ -27,15 +27,21 @@ for i in ${USERS}; do
   PASS=$(echo $i | cut -d':' -f 2)
   echo "${USER}@${MAIL_DOMAIN} ${MAIL_DOMAIN}/${USER}/Maildir/" >> /etc/postfix/vmailbox
   echo "${USER}@${MAIL_DOMAIN}:$(/usr/bin/doveadm pw -s cram-md5 -p ${PASS})" >> /etc/dovecot/users
+  echo "${USER}@${MAIL_DOMAIN} ${USER}@${MAIL_DOMAIN}" >> /etc/postfix/vuseraliases
   for dest in ${ADDITIONAL_MAIL_DOMAINS}; do
     echo "${USER}@${dest} ${dest}/${USER}/Maildir/" >> /etc/postfix/vmailbox
     echo "${USER}@${dest}:$(/usr/bin/doveadm pw -s cram-md5 -p ${PASS})" >> /etc/dovecot/users
+    echo "${USER}@${dest} ${USER}@${dest}" >> /etc/postfix/vuseraliases
   done
 done
 if [ -f /etc/postfix/vmailbox ]; then
   /usr/sbin/postmap /etc/postfix/vmailbox
 fi
+if [ -f /etc/postfix/vuseraliases ]; then
+  /usr/sbin/postmap /etc/postfix/vuseraliases
+else
+  touch /etc/postfix/vuseraliases
+fi
 if [ -f /etc/postfix/valiases ]; then
   /usr/sbin/postmap /etc/postfix/valiases
 fi
-/usr/bin/newaliases
