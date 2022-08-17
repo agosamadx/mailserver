@@ -23,16 +23,13 @@ if [ ! -d /home/virtual ]; then
   chown vmail:vmail /home/virtual
 fi
 for i in ${USERS}; do
-  USER=$(echo $i | cut -d':' -f 1)
+  ADDR=$(echo $i | cut -d':' -f 1)
+  USER=$(echo $ADDR | cut -d'@' -f 1)
+  DOMAIN=$(echo $ADDR | cut -d'@' -f 2)
   PASS=$(echo $i | cut -d':' -f 2)
-  echo "${USER}@${MAIL_DOMAIN} ${MAIL_DOMAIN}/${USER}/Maildir/" >> /etc/postfix/vmailbox
-  echo "${USER}@${MAIL_DOMAIN}:$(/usr/bin/doveadm pw -s cram-md5 -p ${PASS})" >> /etc/dovecot/users
-  echo "${USER}@${MAIL_DOMAIN} ${USER}@${MAIL_DOMAIN}" >> /etc/postfix/vuseraliases
-  for dest in ${ADDITIONAL_MAIL_DOMAINS}; do
-    echo "${USER}@${dest} ${dest}/${USER}/Maildir/" >> /etc/postfix/vmailbox
-    echo "${USER}@${dest}:$(/usr/bin/doveadm pw -s cram-md5 -p ${PASS})" >> /etc/dovecot/users
-    echo "${USER}@${dest} ${USER}@${dest}" >> /etc/postfix/vuseraliases
-  done
+  echo "${USER}@${DOMAIN} ${DOMAIN}/${USER}/Maildir/" >> /etc/postfix/vmailbox
+  echo "${USER}@${DOMAIN}:$(/usr/bin/doveadm pw -s cram-md5 -p ${PASS})" >> /etc/dovecot/users
+  echo "${USER}@${DOMAIN} ${USER}@${DOMAIN}" >> /etc/postfix/vuseraliases
 done
 if [ -f /etc/postfix/vmailbox ]; then
   /usr/sbin/postmap /etc/postfix/vmailbox
