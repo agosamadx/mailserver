@@ -42,3 +42,6 @@ fi
 if [ -f /etc/postfix/valiases ]; then
   /usr/sbin/postmap /etc/postfix/valiases
 fi
+if [ -f /var/lib/dovecot/sieve/default.sieve ]; then
+  sievec /var/lib/dovecot/sieve/default.sieve
+fi
