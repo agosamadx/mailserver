@@ -5,7 +5,7 @@
 
 passdb {
   driver = passwd-file
-  args = scheme=CRYPT username_format=%u /etc/dovecot/users
+  args = scheme=CRAM-MD5 username_format=%u /etc/dovecot/users
 }
 
 userdb {
