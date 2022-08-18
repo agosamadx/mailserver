@@ -28,7 +28,7 @@ for i in ${USERS}; do
   DOMAIN=$(echo $ADDR | cut -d'@' -f 2)
   PASS=$(echo $i | cut -d':' -f 2)
   echo "${USER}@${DOMAIN} ${DOMAIN}/${USER}/Maildir/" >> /etc/postfix/vmailbox
-  echo "${USER}@${DOMAIN}:$(/usr/bin/doveadm pw -s cram-md5 -p ${PASS})" >> /etc/dovecot/users
+  echo "${USER}@${DOMAIN}:$(/usr/bin/doveadm pw -s CRAM-MD5 -p ${PASS})" >> /etc/dovecot/users
   echo "${USER}@${DOMAIN} ${USER}@${DOMAIN}" >> /etc/postfix/vuseraliases
 done
 if [ -f /etc/postfix/vmailbox ]; then
