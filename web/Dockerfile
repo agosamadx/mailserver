@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Asia/Tokyo
 
 RUN apt-get update \
- && apt-get install -y apache2 libapache2-mod-php php-mbstring php-xml php-gd php-zip php-sqlite3 git sudo sqlite3 curl unzip \
+ && apt-get install -y apache2 libapache2-mod-php php-intl php-mbstring php-xml php-gd php-zip php-sqlite3 git sudo sqlite3 curl unzip \
  && apt-get clean
 
 RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash - \
