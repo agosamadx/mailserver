@@ -1,4 +1,4 @@
-FROM debian:stable
+FROM debian:bookworm
 MAINTAINER ago
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -10,7 +10,7 @@ RUN apt-get update \
 
 RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash - \
  && apt-get update \
- && apt-get install -y nodejs \
+ && apt-get install -y nodejs npm \
  && apt-get clean \
  && npm install -g less less-plugin-clean-css
 
