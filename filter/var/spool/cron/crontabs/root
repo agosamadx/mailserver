@@ -1,4 +1,4 @@
 0 * * * * /usr/bin/freshclam --quiet
 0 * * * * /usr/bin/sa-update
-0 0 * * * /usr/bin/sa-learn --spam /home/virtual/*/*/Maildir/.Junk/cur
-0 0 * * * /usr/bin/sa-learn --ham /home/virtual/*/*/Maildir/cur
+0 0/12 * * * /usr/bin/sa-learn --spam /home/virtual/*/*/Maildir/.Junk/cur
+0 0/12 * * * /usr/bin/sa-learn --ham /home/virtual/*/*/Maildir/cur
