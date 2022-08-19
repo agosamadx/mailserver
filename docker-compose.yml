@@ -40,6 +40,8 @@ services:
       - ADDITIONAL_MAIL_DOMAINS=${ADDITIONAL_MAIL_DOMAINS}
     volumes:
       - ./home:/home/
+      - clamav-db:/var/lib/clamav
+      - spamassassin-db:/var/lib/spamassassin
     networks:
       - mailserver_network
   web:
@@ -59,7 +61,7 @@ services:
         - ${HTTP_PORT}:80
         - ${HTTPS_PORT}:443
     volumes:
-      - database:/var/www/database/
+      - web-db:/var/www/database/
       - ./letsencrypt:/etc/letsencrypt/
       - letsencrypt-wellknown:/var/www/html/.well-known
       - letsencrypt-var:/var/lib/letsencrypt/
@@ -90,5 +92,9 @@ volumes:
     driver: local
   letsencrypt-wellknown:
     driver: local
-  database:
+  web-db:
+    driver: local
+  clamav-db:
+    driver: local
+  spamassassin-db:
     driver: local
