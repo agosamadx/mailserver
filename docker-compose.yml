@@ -18,7 +18,10 @@ services:
       - ./letsencrypt:/etc/letsencrypt/
       - letsencrypt-var:/var/lib/letsencrypt/
     networks:
-      - mailserver_network
+      mailserver_network:
+        aliases:
+          - ${SMTP_DOMAIN}
+          - ${IMAP_DOMAIN}
     ports:
       - "25:25"
       - "465:465"

@@ -31,22 +31,12 @@ $config['db_dsnw'] = 'sqlite:////var/www/database/sqlite.db?mode=0644';
 
 // IMAP host chosen to perform the log-in.
 // See defaults.inc.php for the option description.
-$config['imap_host'] = 'tls://mail';
+$config['imap_host'] = 'tls://__IMAP_DOMAIN__';
 $config['imap_vendor'] = 'dovecot';
-$config['imap_conn_options'] = [
-  'ssl' => [
-    'verify_peer_name'  => false
-  ],
-];
 
 // SMTP server host (for sending mails).
 // See defaults.inc.php for the option description.
-$config['smtp_host'] = 'tls://mail';
-$config['smtp_conn_options'] = [
-  'ssl'         => [
-    'verify_peer_name'  => false
-  ]
-];
+$config['smtp_host'] = 'tls://__SMTP_DOMAIN__';
 
 // SMTP username (if required) if you use %u as the username Roundcube
 // will use the current username for login
@@ -76,14 +66,9 @@ $config['plugins'] = [
     'managesieve'
 ];
 
-$config['managesieve_host'] = 'tls://mail';
+$config['managesieve_host'] = 'tls://__IMAP_DOMAIN__';
 $config['managesieve_port'] = 4190;
 $config['managesieve_usetls'] = true;
-$config['managesieve_conn_options'] = [
-  'ssl' => [
-    'verify_peer_name' => false
-  ]
-];
 
 // skin name: folder from skins/
 $config['skin'] = 'elastic';
