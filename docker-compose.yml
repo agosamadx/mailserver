@@ -29,6 +29,7 @@ services:
       - "143:143"
       - "993:993"
       - "4190:4190"
+    restart: always
   filter:
     build:
       context: ./filter
@@ -48,6 +49,7 @@ services:
       - spamassassin-bayes:/var/lib/amavis/.spamassassin
     networks:
       - mailserver_network
+    restart: always
   web:
     build:
       context: ./web
@@ -69,6 +71,7 @@ services:
       - ./letsencrypt:/etc/letsencrypt/
       - letsencrypt-wellknown:/var/www/html/.well-known
       - letsencrypt-var:/var/lib/letsencrypt/
+    restart: always
   certbot:
     build: ./certbot
     image: certbot
@@ -84,6 +87,7 @@ services:
       - letsencrypt-var:/var/lib/letsencrypt/
     networks:
       - mailserver_network
+    restart: always
 
 networks:
   mailserver_network:
