@@ -8,7 +8,7 @@ use strict;
 # the directives you can use in this file
 #
 
-$inet_socket_bind = undef;
+$inet_socket_bind = '0.0.0.0';
 @inet_acl = qw( 127.0.0.0/8 172.64.0.0/12 );
 
 $notify_method  = 'smtp:[mail]:10025';
