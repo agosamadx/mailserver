@@ -5,10 +5,12 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Asia/Tokyo
 
 RUN apt-get update \
- && apt-get install -y apache2 libapache2-mod-php php-intl php-mbstring php-xml php-gd php-zip php-sqlite3 git sudo sqlite3 curl unzip \
+ && apt-get install -y apache2 libapache2-mod-php php-intl php-mbstring php-xml php-gd php-zip php-sqlite3 git sudo sqlite3 curl unzip gnupg \
  && apt-get clean
 
-RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+ && NODE_MAJOR=20 \
+ && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list \
  && apt-get update \
  && apt-get install -y nodejs \
  && apt-get clean \
