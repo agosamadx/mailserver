@@ -24,7 +24,7 @@ RUN cd /usr/local/bin \
 RUN rm -r /var/www/html \
  && chown www-data:www-data /var/www \
  && cd /var/www \
- && sudo -u www-data git clone --depth 1 -b 1.6.0 https://github.com/roundcube/roundcubemail.git html \
+ && sudo -u www-data git clone --depth 1 -b 1.6.9 https://github.com/roundcube/roundcubemail.git html \
  && cd html \
  && sudo -u www-data mv composer.json-dist composer.json \
  && sudo -u www-data composer.phar install --no-dev \
